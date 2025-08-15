@@ -1,12 +1,16 @@
-export default function Contact() {
+import { Mail, Github, Linkedin, Download } from "lucide-react";
+
+export default function Contact(){
     return (
-        <section className="max-w-4xl mx-auto py-16 px-6">
-            <h2 className="text-2xl font-semibold mb-4">Contact</h2>
-            <p className="mb-4">Feel free to reach out via email or connect on LinkedIn/GitHub!</p>
-            <div className="flex flex-col md:flex-row gap-4">
-                <a href="mailto:tiago.ferraz.dev@gmail.com" className="underline">tiago.ferraz.dev@gmail.com</a>
-                <a href="https://github.com/tiago-ferraz-dev" target="_blank" className="underline">GitHub</a>
-                <a href="https://linkedin.com/in/tiagoferraz" target="_blank" className="underline">LinkedIn</a>
+        <section id="contact" className="card text-center">
+            <h3 className="text-2xl font-bold">Contacta-me</h3>
+            <p className="opacity-80 mt-1">Networking, colaborações ou só dizer olá 👋</p>
+
+            <div className="mt-6 flex flex-col sm:flex-row items-center justify-center gap-3">
+                <a href="mailto:tiago.ferraz.dev@gmail.com" className="btn btn-ghost"><Mail size={18}/> Email</a>
+                <a href="https://github.com/Ferraz5" target="_blank" className="btn btn-ghost"><Github size={18}/> GitHub</a>
+                <a href="https://www.linkedin.com/in/tiago-ferraz" target="_blank" className="btn btn-primary"><Linkedin size={18}/> LinkedIn</a>
+                <a href="/TiagoFerraz-CV.pdf" download className="btn btn-ghost"><Download size={18}/> Download CV</a>
             </div>
         </section>
     );

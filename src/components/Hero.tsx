@@ -1,24 +1,26 @@
-"use client";
-
-import { Mail, Github, Linkedin } from "lucide-react";
+import { ArrowRight } from "lucide-react";
 
 export default function Hero() {
     return (
-        <section className="text-center py-24 bg-gradient-to-b from-blue-100 to-white dark:from-gray-800 dark:to-gray-900">
-            <h1 className="text-5xl md:text-7xl font-extrabold mb-4 text-blue-700 dark:text-blue-300">Tiago Ferraz</h1>
-            <p className="text-xl md:text-2xl mb-6 font-medium">Junior Java Developer · Software Engineering Student @ ISEP</p>
-            <a
-                href="/TiagoFerraz-CV.pdf"
-                className="inline-block bg-blue-600 text-white py-2 px-6 rounded-full shadow-lg hover:bg-blue-700 transition mb-8"
-                target="_blank"
-                rel="noopener noreferrer"
-            >
-                📄 Download CV
-            </a>
-            <div className="flex justify-center gap-6 text-blue-600 dark:text-blue-400">
-                <a href="mailto:tiagoairesmferraz@gmail.com" aria-label="Email" className="hover:scale-110 transition"><Mail size={28} /></a>
-                <a href="https://github.com/Ferraz5" target="_blank" aria-label="GitHub" className="hover:scale-110 transition"><Github size={28} /></a>
-                <a href="https://www.linkedin.com/in/tiago-ferraz5/" target="_blank" aria-label="LinkedIn" className="hover:scale-110 transition"><Linkedin size={28} /></a>
+        <section className="card bg-gradient-to-br from-[var(--primary)]/12 to-[var(--secondary)]/10">
+            <h2 className="text-3xl sm:text-4xl font-extrabold">
+                Olá 👋 Sou o <span className="text-[var(--primary)]">Tiago</span>,
+                foco em <span className="text-[var(--secondary)]">backend em Java</span>
+            </h2>
+            <p className="mt-3 text-base sm:text-lg opacity-80">
+                Construo APIs limpas, escaláveis e integrações com <b>Spring Boot, Feign, Docker e Jenkins</b>.
+                Gosto de resolver problemas, aprender e entregar impacto real.
+            </p>
+
+            <div className="mt-6 flex flex-wrap gap-3">
+                <a
+                    href="https://www.linkedin.com/in/tiago-ferraz"
+                    target="_blank"
+                    className="btn btn-primary"
+                >
+                    Vamos falar no LinkedIn <ArrowRight size={16} />
+                </a>
+                <a href="#projects" className="btn btn-ghost">Ver Projetos</a>
             </div>
         </section>
     );

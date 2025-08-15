@@ -1,19 +1,100 @@
-@import "tailwindcss/preflight";
-@tailwind utilities;
+/* src/app/globals.css */
+@import "tailwindcss"; /* inclui preflight + utilities na v4 */
 
-:root {
-    --background: #ffffff;
-    --foreground: #171717;
+/* ---- Tokens e tema ---- */
+:root{
+    --primary:#6f44ff;
+    --primary-600:#5a36e6;
+    --secondary:#43b0ff;
+    --bg:#f6f7fb;
+    --fg:#18192b;
+    --bg-dark:#161827;
+    --fg-dark:#e7ebf3;
+    --card:#ffffff;
+    --card-dark:#1e2032;
+    --shadow:0 12px 30px -12px rgba(8,12,44,.18);
 }
 
-.dark {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+html{ scroll-behavior:smooth; }
+
+body{
+    background:var(--bg);
+    color:var(--fg);
+    font-family: var(--font-geist-sans, ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Inter, Arial, sans-serif);
+    transition: background .35s, color .35s;
+}
+.dark body{ background:var(--bg-dark); color:var(--fg-dark); }
+
+/* ---- Utilitários reusáveis com @apply ---- */
+.container-xxl{ @apply max-w-6xl mx-auto px-4 sm:px-6; }
+
+.card{
+    @apply rounded-2xl border p-6 sm:p-8 transition;
+    @apply border-black/5 dark:border-white/10;
+    background: var(--card);
+    box-shadow: var(--shadow);
+}
+.dark .card{ background: var(--card-dark); }
+
+.btn{ @apply inline-flex items-center gap-2 rounded-full px-5 py-2.5 text-sm font-semibold transition; }
+.btn-primary{ background:var(--primary); color:#fff; }
+.btn-primary:hover{ background:var(--primary-600); }
+.btn-ghost{ @apply border border-black/10 dark:border-white/15 bg-transparent; }
+
+/* ===== Tema: transições suaves globais (ligadas por 500ms) ===== */
+.theme-smooth * {
+    transition:
+            background-color .35s ease,
+            color .35s ease,
+            border-color .35s ease,
+            fill .35s ease,
+            stroke .35s ease,
+            box-shadow .35s ease;
 }
 
-body {
-    background-color: var(--background);
-    color: var(--foreground);
-    font-family: 'Inter', sans-serif;
-    transition: background-color 0.3s, color 0.3s;
+/* ===== Ripple radial que revela o novo tema ===== */
+.theme-ripple{
+    position: fixed;
+    inset: 0;
+    pointer-events: none;
+    z-index: 9999;
+    /* posição do clique vinda do JS */
+    --x: 50%;
+    --y: 50%;
+    /* usa a cor de fundo do TEMA ATUAL (já alternado) */
+    /* como o body já mudou, var(--bg) / var(--bg-dark) já refletem a cor certa */
+    background:
+            radial-gradient(circle at var(--x) var(--y),
+            var(--bg) 0,
+            var(--bg) 0,
+            transparent 0);
+    animation: theme-ripple-expand 600ms ease-out forwards;
 }
+
+.dark .theme-ripple{
+    background:
+            radial-gradient(circle at var(--x) var(--y),
+            var(--bg-dark) 0,
+            var(--bg-dark) 0,
+            transparent 0);
+}
+
+@keyframes theme-ripple-expand{
+    0%   { background-size: 0 0; opacity: 1; }
+    100% { background-size: 200vmax 200vmax; opacity: 0; }
+}
+
+#theme-overlay {
+    position: fixed;
+    inset: 0;
+    pointer-events: none;
+    z-index: 9999;
+    opacity: 0;
+    transition: opacity .6s ease;
+}
+html.theme-animating #theme-overlay {
+    opacity: 1;
+    background: radial-gradient(800px 800px at var(--x,50%) var(--y,50%),
+    rgba(111,68,255,.25), transparent 60%);
+}
+

@@ -1,15 +1,24 @@
-export default function TechStack() {
+import BrandPill from "@/components/BrandPill";
+import { TECH_CATALOG } from "@/data/techCatalog";
+
+const TECH_GRID = [
+    ["java","spring","rest"],
+    ["react","next","docker"],
+    ["jenkins","postgres","sqlserver"],
+    ["gha","ts","node"],
+    ["tailwind","openapi"],
+] as const;
+
+export default function TechStack(){
     return (
-        <section className="max-w-4xl mx-auto py-16 px-6">
-            <h2 className="text-2xl font-semibold mb-4">Tech Stack</h2>
-            <ul className="grid grid-cols-2 md:grid-cols-3 gap-4 list-disc list-inside">
-                <li>Java / Spring Boot</li>
-                <li>Feign / REST APIs</li>
-                <li>Next.js / React</li>
-                <li>Docker / Jenkins</li>
-                <li>PostgreSQL / SQL Server</li>
-                <li>Git / GitHub Actions</li>
-            </ul>
+        <section id="tech" className="card">
+            <h3 className="text-2xl font-bold mb-4">Tech Stack</h3>
+            <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-3">
+                {TECH_GRID.flat().map((id) => {
+                    const t = TECH_CATALOG[id];
+                    return <BrandPill key={id} label={t.label} Icon={t.Icon} color={t.color} />;
+                })}
+            </div>
         </section>
     );
 }
