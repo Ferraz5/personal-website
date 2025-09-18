@@ -1,10 +1,10 @@
 import Image from "next/image";
 import Link from "next/link";
-import { notFound } from "next/navigation";
-import { projects } from "@/data/projects";
-import { TechRow } from "@/components/TechBadge";
+import {notFound} from "next/navigation";
+import {projects} from "@/data/projects";
+import {TechRow} from "@/components/TechBadge";
 
-type Props = { params: { slug: string } };
+type Props = { readonly params: { readonly slug: string } };
 
 export function generateStaticParams() {
     return projects.map((p) => ({ slug: p.slug }));
