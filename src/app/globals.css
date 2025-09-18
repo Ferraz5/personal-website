@@ -1,31 +1,63 @@
-/* src/app/globals.css */
-@import "tailwindcss"; /* inclui preflight + utilities na v4 */
+@import "tailwindcss"; /* Tailwind v4: inclui preflight + utilities */
 
-/* ---- Tokens e tema ---- */
+/* =========================
+   Design tokens (LIGHT)
+   ========================= */
 :root{
-    --primary:#6f44ff;
-    --primary-600:#5a36e6;
-    --secondary:#43b0ff;
-    --bg:#f6f7fb;
-    --fg:#18192b;
-    --bg-dark:#161827;
-    --fg-dark:#e7ebf3;
-    --card:#ffffff;
-    --card-dark:#1e2032;
-    --shadow:0 12px 30px -12px rgba(8,12,44,.18);
+    /* Brand */
+    --primary: #6f44ff;
+    --primary-600: #5a36e6;
+    --secondary: #43b0ff;
+
+    /* Base (light) */
+    --bg: #f6f7fb;
+    --fg: #18192b;
+    --card: #ffffff;
+
+    /* Base (dark) – usados apenas por .dark */
+    --bg-dark: #161827;
+    --fg-dark: #e7ebf3;
+    --card-dark: #1e2032;
+
+    /* Effects */
+    --shadow: 0 12px 30px -12px rgba(8, 12, 44, .18);
+
+    /* Chips / badges (light) */
+    --chip-bg: #141826; /* pill mais escuro p/ contrastar no light */
+    --chip-fg: #e8ecf8; /* texto claro no light */
+    --chip-border: rgba(17, 24, 39, .22); /* borda discreta no light */
 }
 
+/* =========================
+   Overrides no modo escuro
+   ========================= */
+.dark {
+    /* Chips / badges (dark) */
+    --chip-bg: #151a2b;
+    --chip-fg: #e9edf7;
+    --chip-border: rgba(255, 255, 255, .12);
+}
+
+/* =========================
+   Base
+   ========================= */
 html{ scroll-behavior:smooth; }
 
 body{
-    background:var(--bg);
-    color:var(--fg);
+    background: var(--bg);
+    color: var(--fg);
     font-family: var(--font-geist-sans, ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Inter, Arial, sans-serif);
     transition: background .35s, color .35s;
 }
-.dark body{ background:var(--bg-dark); color:var(--fg-dark); }
 
-/* ---- Utilitários reusáveis com @apply ---- */
+.dark body {
+    background: var(--bg-dark);
+    color: var(--fg-dark);
+}
+
+/* =========================
+   Utilitários
+   ========================= */
 .container-xxl{ @apply max-w-6xl mx-auto px-4 sm:px-6; }
 
 .card{
@@ -34,14 +66,42 @@ body{
     background: var(--card);
     box-shadow: var(--shadow);
 }
+
 .dark .card{ background: var(--card-dark); }
 
-.btn{ @apply inline-flex items-center gap-2 rounded-full px-5 py-2.5 text-sm font-semibold transition; }
-.btn-primary{ background:var(--primary); color:#fff; }
-.btn-primary:hover{ background:var(--primary-600); }
+.btn {
+    @apply inline-flex items-center gap-2 rounded-full px-5 py-2.5 text-sm font-semibold transition;
+}
+
+.btn-primary {
+    background: var(--primary);
+    color: #fff;
+}
+
+.btn-primary:hover {
+    background: var(--primary-600);
+}
 .btn-ghost{ @apply border border-black/10 dark:border-white/15 bg-transparent; }
 
-/* ===== Tema: transições suaves globais (ligadas por 500ms) ===== */
+/* =========================
+   Chips (badges) prontos
+   ========================= */
+.chip {
+    @apply inline-flex items-center gap-2 rounded-xl px-3 py-2 text-sm font-medium border;
+    background: var(--chip-bg);
+    color: var(--chip-fg);
+    border-color: var(--chip-border);
+}
+
+.chip-icon {
+    @apply inline-grid place-items-center size-7 rounded-lg;
+    background: color-mix(in oklab, var(--primary) 15%, transparent);
+    color: var(--primary);
+}
+
+/* =========================
+   Tema: transições suaves
+   ========================= */
 .theme-smooth * {
     transition:
             background-color .35s ease,
@@ -52,31 +112,21 @@ body{
             box-shadow .35s ease;
 }
 
-/* ===== Ripple radial que revela o novo tema ===== */
+/* =========================
+   Tema: ripple reveal
+   ========================= */
 .theme-ripple{
     position: fixed;
     inset: 0;
     pointer-events: none;
     z-index: 9999;
-    /* posição do clique vinda do JS */
     --x: 50%;
     --y: 50%;
-    /* usa a cor de fundo do TEMA ATUAL (já alternado) */
-    /* como o body já mudou, var(--bg) / var(--bg-dark) já refletem a cor certa */
-    background:
-            radial-gradient(circle at var(--x) var(--y),
-            var(--bg) 0,
-            var(--bg) 0,
-            transparent 0);
+    background: radial-gradient(circle at var(--x) var(--y), var(--bg) 0, var(--bg) 0, transparent 0);
     animation: theme-ripple-expand 600ms ease-out forwards;
 }
-
 .dark .theme-ripple{
-    background:
-            radial-gradient(circle at var(--x) var(--y),
-            var(--bg-dark) 0,
-            var(--bg-dark) 0,
-            transparent 0);
+    background: radial-gradient(circle at var(--x) var(--y), var(--bg-dark) 0, var(--bg-dark) 0, transparent 0);
 }
 
 @keyframes theme-ripple-expand{
@@ -84,6 +134,7 @@ body{
     100% { background-size: 200vmax 200vmax; opacity: 0; }
 }
 
+/* glow overlay durante a troca */
 #theme-overlay {
     position: fixed;
     inset: 0;
@@ -92,21 +143,8 @@ body{
     opacity: 0;
     transition: opacity .6s ease;
 }
+
 html.theme-animating #theme-overlay {
     opacity: 1;
-    background: radial-gradient(800px 800px at var(--x,50%) var(--y,50%),
-    rgba(111,68,255,.25), transparent 60%);
-}
-
-/* ---- Chips (badges) com contraste por tema ---- */
-:root {
-    --chip-bg: #141826; /* CLARO: pill escuro (contrasta no teu layout) */
-    --chip-fg: #e8ecf8; /* CLARO: texto claro */
-    --chip-border: rgba(17, 24, 39, .22); /* CLARO: borda discreta */
-}
-
-.dark {
-    --chip-bg: #151a2b; /* ESCURO: pill escuro */
-    --chip-fg: #e9edf7; /* ESCURO: texto claro */
-    --chip-border: rgba(255, 255, 255, .12);
+    background: radial-gradient(800px 800px at var(--x, 50%) var(--y, 50%), rgba(111, 68, 255, .25), transparent 60%);
 }
