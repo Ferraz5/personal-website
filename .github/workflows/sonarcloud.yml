@@ -1,0 +1,54 @@
+name: SonarCloud
+
+on:
+  push:
+    branches: [ main, development ]
+  # mantém para uso manual quando precisa
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pull-requests: read
+
+jobs:
+  scan:
+    name: SonarCloud Scan
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout (full history para blame correto)
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+          cache-dependency-path: package-lock.json
+
+      - name: Instalar dependências
+        run: npm ci
+
+      # (Opcional) Se tiver testes que geram lcov
+      # Deixa continuar mesmo sem testes para não falhar o pipeline
+      - name: Testes com cobertura (opcional)
+        run: |
+          npm test -- --coverage --watchAll=false || echo "sem testes/cobertura"
+        continue-on-error: true
+
+      - name: Cache SonarCloud packages
+        uses: actions/cache@v4
+        with:
+          path: ~/.sonar/cache
+          key: ${{ runner.os }}-sonar
+          restore-keys: ${{ runner.os }}-sonar
+
+      - name: SonarCloud Scan
+        uses: SonarSource/sonarcloud-github-action@v2
+        env:
+          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+          # Se um dia usar PR decoration, o GITHUB_TOKEN ajuda
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        # Sem args: o scanner vai ler o ficheiro sonar-project.properties
