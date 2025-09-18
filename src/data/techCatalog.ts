@@ -1,18 +1,18 @@
 import {
-    SiOpenjdk,
-    SiSpringboot,
-    SiReact,
-    SiNextdotjs,
     SiDocker,
-    SiJenkins,
-    SiPostgresql,
     SiGithubactions,
-    SiTypescript,
+    SiJenkins,
+    SiNextdotjs,
     SiNodedotjs,
-    SiTailwindcss,
     SiOpenapiinitiative,
+    SiOpenjdk,
+    SiPostgresql,
+    SiReact,
+    SiSpringboot,
+    SiTailwindcss,
+    SiTypescript,
 } from "react-icons/si";
-import { Database, PlugZap } from "lucide-react";
+import {Database, PlugZap} from "lucide-react";
 
 export type TechId =
     | "java"
@@ -38,17 +38,16 @@ export type TechMeta = {
     Icon: React.ComponentType<{ size?: number }>;
 };
 
+// ...
 export const TECH_CATALOG: Record<TechId, TechMeta> = {
-    // Java → usa OpenJDK (ícone oficial do Simple-Icons)
     java:      { id: "java",      label: "Java",              color: "#EA2D2E", Icon: SiOpenjdk },
     spring:    { id: "spring",    label: "Spring Boot",       color: "#6DB33F", Icon: SiSpringboot },
     rest:      { id: "rest",      label: "REST / Feign",      color: "#FFB400", Icon: PlugZap },
     react:     { id: "react",     label: "React",             color: "#61DAFB", Icon: SiReact },
-    next:      { id: "next",      label: "Next.js",           color: "#000000", Icon: SiNextdotjs },
+    next: {id: "next", label: "Next.js", color: "#6f44ff", Icon: SiNextdotjs},
     docker:    { id: "docker",    label: "Docker",            color: "#2496ED", Icon: SiDocker },
     jenkins:   { id: "jenkins",   label: "Jenkins",           color: "#D33833", Icon: SiJenkins },
     postgres:  { id: "postgres",  label: "PostgreSQL",        color: "#4169E1", Icon: SiPostgresql },
-    // SQL Server → usa ícone genérico de Database (lucide)
     sqlserver: { id: "sqlserver", label: "SQL Server",        color: "#CC2927", Icon: Database },
     gha:       { id: "gha",       label: "GitHub Actions",    color: "#2088FF", Icon: SiGithubactions },
     ts:        { id: "ts",        label: "TypeScript",        color: "#3178C6", Icon: SiTypescript },

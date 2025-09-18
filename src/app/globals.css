@@ -98,3 +98,15 @@ html.theme-animating #theme-overlay {
     rgba(111,68,255,.25), transparent 60%);
 }
 
+/* ---- Chips (badges) com contraste por tema ---- */
+:root {
+    --chip-bg: #141826; /* CLARO: pill escuro (contrasta no teu layout) */
+    --chip-fg: #e8ecf8; /* CLARO: texto claro */
+    --chip-border: rgba(17, 24, 39, .22); /* CLARO: borda discreta */
+}
+
+.dark {
+    --chip-bg: #151a2b; /* ESCURO: pill escuro */
+    --chip-fg: #e9edf7; /* ESCURO: texto claro */
+    --chip-border: rgba(255, 255, 255, .12);
+}

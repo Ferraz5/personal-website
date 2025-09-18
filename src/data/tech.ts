@@ -1,14 +1,5 @@
-import type { LucideIcon } from "lucide-react";
-import {
-    Code2,
-    Leaf,
-    PlugZap,
-    Atom,
-    Package,
-    Wrench,
-    Database,
-    Workflow,
-} from "lucide-react";
+import type {LucideIcon} from "lucide-react";
+import {Atom, Code2, Database, Leaf, Package, PlugZap, Workflow, Wrench,} from "lucide-react";
 
 export type TechKey =
     | "java"
@@ -20,10 +11,7 @@ export type TechKey =
     | "db"
     | "gha";
 
-export const TECHS: Record<
-    TechKey,
-    { label: string; Icon: LucideIcon; color?: string }
-> = {
+export const TECHS: Record<TechKey, { label: string; Icon: LucideIcon; color?: string }> = {
     java: { label: "Java", Icon: Code2 },
     spring: { label: "Spring Boot", Icon: Leaf },
     rest: { label: "REST APIs / Feign", Icon: PlugZap },

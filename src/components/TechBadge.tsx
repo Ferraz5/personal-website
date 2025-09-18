@@ -1,26 +1,34 @@
-// src/components/TechBadge.tsx
-import type { IconType } from "react-icons";
+import type {IconType} from "react-icons";
 import {
-    SiSpringboot, SiReact, SiNextdotjs, SiDocker, SiJenkins,
-    SiPostgresql, SiTailwindcss, SiNodedotjs,
-    SiGithubactions, SiTypescript, SiSwagger, SiApache,
+    SiApache,
+    SiDocker,
+    SiGithubactions,
+    SiJenkins,
+    SiNextdotjs,
+    SiNodedotjs,
+    SiPostgresql,
+    SiReact,
+    SiSpringboot,
+    SiSwagger,
+    SiTailwindcss,
+    SiTypescript,
 } from "react-icons/si";
-import { FaJava } from "react-icons/fa";
-import { DiMsqlServer } from "react-icons/di"; // se preferires, troca por SiMicrosoftsqlserver
+import {FaJava} from "react-icons/fa";
+import {DiMsqlServer} from "react-icons/di";
 
 export type TechKey =
     | "java" | "spring" | "react" | "next" | "docker" | "jenkins"
     | "postgres" | "sqlserver" | "tailwind" | "node"
     | "githubactions" | "typescript" | "openapi" | "feign";
 
-// 👇 usa IconType (do react-icons) para permitir `size`, `color`, etc.
-type TechDef = { label: string; Icon: IconType; color: string };
+type TechDef = { label: string; Icon: IconType; color?: string };
 
+// ...
 export const TECH: Record<TechKey, TechDef> = {
     java:          { label: "Java",            Icon: FaJava,           color: "#e11d48" },
     spring:        { label: "Spring Boot",     Icon: SiSpringboot,     color: "#22c55e" },
     react:         { label: "React",           Icon: SiReact,          color: "#22d3ee" },
-    next:          { label: "Next.js",         Icon: SiNextdotjs,      color: "#ffffff" },
+    next: {label: "Next.js", Icon: SiNextdotjs, color: "#6f44ff"},
     docker:        { label: "Docker",          Icon: SiDocker,         color: "#38bdf8" },
     jenkins:       { label: "Jenkins",         Icon: SiJenkins,        color: "#f97316" },
     postgres:      { label: "PostgreSQL",      Icon: SiPostgresql,     color: "#60a5fa" },
@@ -38,21 +46,19 @@ export function TechBadge({ tech }: { tech: TechKey }) {
     if (!T) return null;
     return (
         <span
-            className="inline-flex items-center gap-2 rounded-full px-3 py-1 text-[13px] font-medium border border-white/10 bg-white/5 dark:bg-white/5"
-            style={{ color: T.color }}
+            className="
+        inline-flex items-center gap-2 rounded-full px-3 py-1 text-[13px] font-medium
+        border bg-[var(--chip-bg)] text-[var(--chip-fg)] border-[var(--chip-border)]
+      "
             title={T.label}
         >
-      <T.Icon size={14} /> {}
-            <span className="text-foreground/90">{T.label}</span>
+      <T.Icon size={14} color={T.color}/>
+      <span className="text-[var(--chip-fg)]">{T.label}</span>
     </span>
     );
 }
 
 export function TechRow({ items }: { items: TechKey[] }) {
     if (!items?.length) return null;
-    return (
-        <div className="flex flex-wrap gap-2">
-            {items.map((k) => <TechBadge key={k} tech={k} />)}
-        </div>
-    );
+    return <div className="flex flex-wrap gap-2">{items.map(k => <TechBadge key={k} tech={k}/>)}</div>;
 }

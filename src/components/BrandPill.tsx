@@ -1,36 +1,32 @@
-import type { ComponentType } from "react";
+import React from "react";
 
-function hexToRgba(hex: string, alpha = 0.16) {
-    const h = hex.replace("#", "");
-    const full = h.length === 3 ? h.split("").map(c => c + c).join("") : h;
-    const int = parseInt(full, 16);
-    const r = (int >> 16) & 255, g = (int >> 8) & 255, b = int & 255;
-    return `rgba(${r}, ${g}, ${b}, ${alpha})`;
-}
-
-export default function BrandPill({
-                                      label,
-                                      Icon,
-                                      color,
-                                  }: {
+type Props = {
     label: string;
-    Icon: ComponentType<{ size?: number }>; // aceita react-icons e lucide
-    color: string;
-}) {
-    const bg = hexToRgba(color, 0.16);
-    const dot = hexToRgba(color, 0.28);
+    Icon: React.ComponentType<{ size?: number }>;
+    color?: string;          // cor do ícone/borda
+    tintLabel?: boolean;     // quando true, texto herda a mesma cor
+};
 
+export default function BrandPill({label, Icon, color, tintLabel = false}: Props) {
     return (
-        <span className="inline-flex items-center gap-2 rounded-xl px-3 py-2 text-sm font-medium
-                     bg-[var(--card)] dark:bg-[var(--card-dark)]
-                     border border-black/5 dark:border-white/10 shadow-[var(--shadow)]">
-      <span className="inline-grid place-items-center size-7 rounded-lg" style={{ backgroundColor: bg, color }}>
+        <span
+            className={`inline-flex items-center gap-2 rounded-xl px-3 py-2 text-sm font-medium
+                  bg-[#1f2537] text-white/90 dark:bg-[#1b2232]
+                  border border-black/10 dark:border-white/10 shadow-[var(--shadow)]`}
+            style={tintLabel ? {color} : undefined}
+            title={label}
+        >
+      <span
+          className="inline-grid place-items-center size-7 rounded-lg border"
+          style={{
+              color,
+              borderColor: color ? `${color}40` : "rgba(255,255,255,.12)",
+              backgroundColor: color ? `${color}1a` : "transparent",
+          }}
+      >
         <Icon size={16} />
       </span>
-      <span className="relative pr-2">
-        {label}
-          <span className="absolute -right-1 top-1/2 -translate-y-1/2 size-1.5 rounded-full" style={{ backgroundColor: dot }} />
-      </span>
+      <span className={tintLabel ? "" : "text-white/90"}>{label}</span>
     </span>
     );
 }
