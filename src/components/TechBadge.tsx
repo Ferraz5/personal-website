@@ -41,7 +41,7 @@ export const TECH: Record<TechKey, TechDef> = {
     feign:         { label: "REST / Feign",    Icon: SiApache,         color: "#f59e0b" },
 };
 
-export function TechBadge({ tech }: { tech: TechKey }) {
+export function TechBadge({tech}: { readonly tech: TechKey }) {
     const T = TECH[tech];
     if (!T) return null;
     return (
@@ -58,7 +58,7 @@ export function TechBadge({ tech }: { tech: TechKey }) {
     );
 }
 
-export function TechRow({ items }: { items: TechKey[] }) {
+export function TechRow({items}: { readonly items: TechKey[] }) {
     if (!items?.length) return null;
     return <div className="flex flex-wrap gap-2">{items.map(k => <TechBadge key={k} tech={k}/>)}</div>;
 }

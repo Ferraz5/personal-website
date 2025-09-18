@@ -1,10 +1,10 @@
 import React from "react";
 
 type Props = {
-    label: string;
-    Icon: React.ComponentType<{ size?: number }>;
-    color?: string;          // cor do ícone/borda
-    tintLabel?: boolean;     // quando true, texto herda a mesma cor
+    readonly label: string;
+    readonly Icon: React.ComponentType<{ size?: number }>;
+    readonly color?: string;          // cor do ícone/borda
+    readonly tintLabel?: boolean;     // quando true, texto herda a mesma cor
 };
 
 export default function BrandPill({label, Icon, color, tintLabel = false}: Props) {

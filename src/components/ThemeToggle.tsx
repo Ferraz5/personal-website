@@ -1,8 +1,8 @@
 "use client";
-import { useEffect, useState } from "react";
-import { Moon, Sun } from "lucide-react";
+import {useEffect, useState} from "react";
+import {Moon, Sun} from "lucide-react";
 
-export default function ThemeToggle({ className = "" }: { className?: string }) {
+export default function ThemeToggle({className = ""}: { readonly className?: string }) {
     const [dark, setDark] = useState(false);
 
     useEffect(() => {
