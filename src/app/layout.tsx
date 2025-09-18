@@ -13,7 +13,7 @@ export const metadata: Metadata = {
     description: "Junior Java Developer · Software Engineering Student @ ISEP",
 };
 
-export default function RootLayout({children}: { children: ReactNode }) {
+export default function RootLayout({children}: { readonly children: ReactNode }) {
     return (
         <html lang="pt" suppressHydrationWarning>
         <body className={`${geistSans.variable} ${geistMono.variable} antialiased`}>
