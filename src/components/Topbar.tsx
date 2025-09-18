@@ -2,7 +2,7 @@
 
 import ThemeToggle from "./ThemeToggle";
 
-export default function Topbar({ className = "" }: { className?: string }){
+export default function Topbar({className = ""}: { readonly className?: string }) {
     return (
         <header className={`backdrop-blur bg-white/80 dark:bg-black/30 border-b border-black/10 dark:border-white/10 ${className}`}>
             <div className="container-xxl flex items-center justify-between py-3">

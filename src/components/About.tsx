@@ -3,8 +3,8 @@ export default function About(){
         <section id="about" className="card">
             <h3 className="text-2xl font-bold mb-2">Sobre Mim</h3>
             <p className="text-[15px] leading-7">
-                Estudante de <b>Engenharia Informática</b> no <b>ISEP</b> e
-                <b> Junior Java Developer</b> na <b>NiW (Salvador Caetano)</b>.
+                Estudante de <b>Engenharia Informática</b> no <b>ISEP</b> e{' '}
+                <b>Junior Java Developer</b> na <b>NiW (Salvador Caetano)</b>.
                 Adoro backend, clean code e boas integrações REST.
             </p>
             <p className="text-[15px] leading-7 mt-3">

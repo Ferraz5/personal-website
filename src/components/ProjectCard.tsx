@@ -1,8 +1,8 @@
 import Link from "next/link";
-import { TechRow } from "./TechBadge";
-import type { Project } from "@/data/projects";
+import {TechRow} from "./TechBadge";
+import type {Project} from "@/data/projects";
 
-export default function ProjectCard({ p }: { p: Project }) {
+export default function ProjectCard({p}: { readonly p: Project }) {
     return (
         <Link
             href={`/projects/${p.slug}`}
